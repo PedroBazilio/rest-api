@@ -28,26 +28,12 @@ public class PersonResource {
         this.personRepository = personRepository;
     }
 
-//    @GetMapping
-//    public List<Person> getPersons () {
-//        return personRepository.findAll();
-//    }
-
-
     @GetMapping("")
     public ResponseEntity<List<PersonDTO>> getPeopleWithTotalTime() {
         log.info("Rest request to get people");
         List<PersonDTO> peopleList = personService.getPeopleList();
         return ResponseEntity.ok(peopleList);
     }
-
-//    @GetMapping("/gastos")
-//    public ResponseEntity<List<PersonDTO>> getPersonWithTaskDuration() {
-//        List<PersonDTO> people = personService.getNameDepartmentAvgTask(); // pega as pessoas com a duração média de
-//        // tarefas
-//
-//        return ResponseEntity.ok(people);
-//    }
 
 
     @PostMapping

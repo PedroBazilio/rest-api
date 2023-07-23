@@ -27,11 +27,4 @@ public class DepartmentResource {
     }
 
 
-//    @GetMapping("/departamentos")
-//    public ResponseEntity<List<DepartmentDTO>> getDepartmentsWithCounts() {
-//        List<DepartmentDTO> people = personService.getDepartmentsWithCounts();
-//        return ResponseEntity.ok(people);
-//    }
-
-
 }
