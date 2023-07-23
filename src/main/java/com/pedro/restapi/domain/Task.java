@@ -3,6 +3,7 @@ package com.pedro.restapi.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,8 +13,6 @@ public class Task {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "title")
@@ -27,7 +26,7 @@ public class Task {
     private LocalDateTime dueDate;
 
     @Column(name = "duration")
-    private Integer duration;
+    private Duration duration;
 
     @Column(name = "finished")
     private Boolean finished;
@@ -70,11 +69,11 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public Integer getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(Integer duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 

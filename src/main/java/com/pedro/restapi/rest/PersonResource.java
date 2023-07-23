@@ -2,6 +2,7 @@ package com.pedro.restapi.rest;
 
 import com.pedro.restapi.domain.Person;
 import com.pedro.restapi.repository.PersonRepository;
+import com.pedro.restapi.rest.errors.DepartmentErrorException;
 import com.pedro.restapi.rest.errors.PersonErrorException;
 import com.pedro.restapi.service.PersonService;
 import com.pedro.restapi.service.dto.PersonDTO;
@@ -27,29 +28,47 @@ public class PersonResource {
         this.personRepository = personRepository;
     }
 
-    @GetMapping
-    public List<Person> getPersons () {
-        return personRepository.findAll();
+//    @GetMapping
+//    public List<Person> getPersons () {
+//        return personRepository.findAll();
+//    }
+
+
+    @GetMapping("")
+    public ResponseEntity<List<PersonDTO>> getPeopleWithTotalTime() {
+        log.info("Rest request to get people");
+        List<PersonDTO> peopleList = personService.getPeopleList();
+        return ResponseEntity.ok(peopleList);
     }
 
+//    @GetMapping("/gastos")
+//    public ResponseEntity<List<PersonDTO>> getPersonWithTaskDuration() {
+//        List<PersonDTO> people = personService.getNameDepartmentAvgTask(); // pega as pessoas com a duração média de
+//        // tarefas
+//
+//        return ResponseEntity.ok(people);
+//    }
 
 
     @PostMapping
-    public ResponseEntity<Person> createPerson(@RequestBody PersonDTO personDTO) throws URISyntaxException {
-        log.info("Rest request to save Person: {}", personDTO);
-        if (personDTO.getId() != null) {
-            throw new PersonErrorException("A new movement cannot already have an ID");
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) throws URISyntaxException {
+        log.info("Rest request to save Person: {}", person);
+        if (person.getId() != null) {
+            throw new PersonErrorException("A new person cannot already have an ID");
         }
-        Person person = personService.save(personDTO);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(personService.save(person));
     }
 
-//    @PutMapping("/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable Long id,@RequestBody Person person) throws URISyntaxException, DepartmentErrorException {
+        log.info("Rest request to update Person: {}", person);
+        return ResponseEntity.ok(personService.update(id, person));
+    }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePerson (@PathVariable Long id) {
+        log.info("Rest request to delete Person: {}", id);
         try {
-            log.info("Deleting person...");
             personService.delete(id);
         } catch (Exception e) {
             throw new PersonErrorException("Cannot delete the person");
@@ -57,6 +76,9 @@ public class PersonResource {
         log.info("Person deleted!");
         return ResponseEntity.ok().build();
     }
+
+
+
 
 
 

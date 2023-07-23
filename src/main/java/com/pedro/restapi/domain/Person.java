@@ -3,7 +3,7 @@ package com.pedro.restapi.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -13,8 +13,6 @@ public class Person {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "name")

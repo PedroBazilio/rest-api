@@ -9,8 +9,6 @@ public class TaskDTO implements Serializable {
 
     private static final long serialVersionUID = -6775833611650081935L;
 
-    private Long id;
-
     private String title;
 
     private String description;
@@ -25,13 +23,6 @@ public class TaskDTO implements Serializable {
 
     private Long personId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
