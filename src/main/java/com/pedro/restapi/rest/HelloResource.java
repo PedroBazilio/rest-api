@@ -1,6 +1,5 @@
 package com.pedro.restapi.rest;
 
-import com.pedro.restapi.domain.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
