@@ -2,7 +2,6 @@ package com.pedro.restapi.service.dto;
 
 public class PersonTotalTimeTaskDTO{
 
-
     private String name;
     
     private String departmentName;
@@ -16,7 +15,7 @@ public class PersonTotalTimeTaskDTO{
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getDepartmentName() {
         return departmentName;
     }
@@ -25,7 +24,7 @@ public class PersonTotalTimeTaskDTO{
         this.departmentName = departmentName;
     }
 
- 
+
     public float getTotalTaskTime() {
         return totalTaskTime;
     }

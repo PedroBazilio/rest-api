@@ -1,10 +1,6 @@
 package com.pedro.restapi.domain;
 
 import jakarta.persistence.*;
-
-import java.io.Serial;
-import java.io.Serializable;
-
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 

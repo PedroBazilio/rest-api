@@ -2,25 +2,17 @@ package com.pedro.restapi.service;
 
 import com.pedro.restapi.domain.Department;
 import com.pedro.restapi.domain.Person;
-import com.pedro.restapi.domain.Task;
 import com.pedro.restapi.repository.DepartmentRepository;
 import com.pedro.restapi.repository.PersonRepository;
-import com.pedro.restapi.rest.PersonResource;
 import com.pedro.restapi.rest.errors.DepartmentErrorException;
 import com.pedro.restapi.rest.errors.PersonErrorException;
-import com.pedro.restapi.service.dto.DepartmentDTO;
 import com.pedro.restapi.service.dto.PersonAvgTimeTaskDTO;
-import com.pedro.restapi.service.dto.PersonDTO;
 import com.pedro.restapi.service.dto.PersonTotalTimeTaskDTO;
-import com.pedro.restapi.service.mapper.PersonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
@@ -28,8 +20,6 @@ import java.util.stream.Collectors;
 public class PersonService {
 
     PersonRepository personRepository;
-
-    PersonMapper personMapper;
 
     DepartmentRepository departmentRepository;
 

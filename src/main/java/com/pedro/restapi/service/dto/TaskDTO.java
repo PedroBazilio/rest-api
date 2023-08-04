@@ -1,12 +1,9 @@
 package com.pedro.restapi.service.dto;
 
-import org.springframework.cglib.core.Local;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class TaskDTO implements Serializable {
-
 
     private String title;
 

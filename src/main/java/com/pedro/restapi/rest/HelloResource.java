@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("")
 public class HelloResource {
 
-
     private final Logger log = LoggerFactory.getLogger(HelloResource.class);
-
 
     @GetMapping("")
     public ResponseEntity<String> getPendingTasks() {

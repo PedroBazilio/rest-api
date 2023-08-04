@@ -4,7 +4,6 @@ import java.util.OptionalDouble;
 
 public class PersonAvgTimeTaskDTO{
 
-
     private String name;
 
     private String departmentName;

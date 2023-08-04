@@ -31,13 +31,8 @@ public class DepartmentService {
     }
 
     public List<DepartmentDTO> getDepartmentsDTOList() {
+        log.info("Getting departmentDTO list...");
        return departmentRepository.getDepartmentsDTOList();
-
-
-
-
-
     }
-
 
 }

@@ -2,10 +2,6 @@ package com.pedro.restapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Optional;
 import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;

@@ -1,22 +1,16 @@
 package com.pedro.restapi.service;
 
-import com.pedro.restapi.domain.Department;
 import com.pedro.restapi.domain.Person;
 import com.pedro.restapi.domain.Task;
 import com.pedro.restapi.repository.DepartmentRepository;
 import com.pedro.restapi.repository.PersonRepository;
 import com.pedro.restapi.repository.TaskRepository;
 import com.pedro.restapi.rest.errors.TaskErrorException;
-import com.pedro.restapi.service.dto.PersonDTO;
-import com.pedro.restapi.service.dto.TaskDTO;
-import com.pedro.restapi.service.mapper.PersonMapper;
-import com.pedro.restapi.service.mapper.TaskMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -24,9 +18,6 @@ public class TaskService {
     private final Logger log = LoggerFactory.getLogger(PersonService.class);
 
     PersonRepository personRepository;
-    TaskMapper taskMapper;
-
-    PersonMapper personMapper;
 
     TaskRepository taskRepository;
 

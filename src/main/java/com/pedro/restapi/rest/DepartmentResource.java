@@ -1,9 +1,6 @@
 package com.pedro.restapi.rest;
 
-import com.pedro.restapi.domain.Department;
-import com.pedro.restapi.repository.DepartmentRepository;
 import com.pedro.restapi.service.DepartmentService;
-import com.pedro.restapi.service.PersonService;
 import com.pedro.restapi.service.dto.DepartmentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +13,11 @@ import java.util.List;
 @RequestMapping("/departamentos")
 public class DepartmentResource {
 
-    private final DepartmentRepository departmentRepository;
-
     DepartmentService departmentService;
 
     private final Logger log = LoggerFactory.getLogger(DepartmentResource.class);
 
-    public DepartmentResource(DepartmentRepository departmentRepository, DepartmentService departmentService) {
-        this.departmentRepository = departmentRepository;
+    public DepartmentResource(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 

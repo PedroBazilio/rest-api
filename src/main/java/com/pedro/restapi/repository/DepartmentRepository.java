@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Long>{
 
-
     @Query("SELECT NEW com.pedro.restapi.service.dto.DepartmentDTO(d.title, COUNT(DISTINCT p), COUNT(distinct t)) " +
             "FROM Department d " +
             "LEFT JOIN Person p ON d.id = p.department.id " +

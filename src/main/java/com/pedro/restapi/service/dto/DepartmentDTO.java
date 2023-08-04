@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DepartmentDTO {
 
-
     private String title;
 
     private Long people;
