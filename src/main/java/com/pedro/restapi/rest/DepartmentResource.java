@@ -2,6 +2,7 @@ package com.pedro.restapi.rest;
 
 import com.pedro.restapi.domain.Department;
 import com.pedro.restapi.repository.DepartmentRepository;
+import com.pedro.restapi.service.DepartmentService;
 import com.pedro.restapi.service.PersonService;
 import com.pedro.restapi.service.dto.DepartmentDTO;
 import org.slf4j.Logger;
@@ -17,13 +18,21 @@ public class DepartmentResource {
 
     private final DepartmentRepository departmentRepository;
 
-    PersonService personService;
+    DepartmentService departmentService;
 
     private final Logger log = LoggerFactory.getLogger(DepartmentResource.class);
 
-    public DepartmentResource(DepartmentRepository departmentRepository, PersonService personService) {
+    public DepartmentResource(DepartmentRepository departmentRepository, DepartmentService departmentService) {
         this.departmentRepository = departmentRepository;
-        this.personService = personService;
+        this.departmentService = departmentService;
+    }
+
+
+    @GetMapping("")
+    public ResponseEntity<List<DepartmentDTO>> getDepartments() {
+        log.info("Rest request to get departments");
+        List<DepartmentDTO> departmentsDTOList = departmentService.getDepartmentsDTOList();
+        return ResponseEntity.ok(departmentsDTOList);
     }
 
 

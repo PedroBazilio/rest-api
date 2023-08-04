@@ -1,36 +1,21 @@
 package com.pedro.restapi.service.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Data
+@Component
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class DepartmentDTO {
 
-    private static final long serialVersionUID = -6775833611650081935L;
 
     private String title;
 
-    private Integer people;
+    private Long people;
 
-    private Integer tasks;
+    private Long tasks;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getPeople() {
-        return people;
-    }
-
-    public void setPeople(Integer people) {
-        this.people = people;
-    }
-
-    public Integer getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Integer tasks) {
-        this.tasks = tasks;
-    }
 }

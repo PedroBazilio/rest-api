@@ -41,23 +41,27 @@ public class TaskService {
 
     public Task add(Task task) {
         log.info("Adding task {}", task);
-
         return taskRepository.save(task);
     }
 
 
-    public Task allocate(Long id, Person person) throws TaskErrorException {
+    public Task allocate(Long id, Long personId) throws TaskErrorException {
         log.info("Attempting to allocate person to a task");
         Task task = taskRepository.findById(id).
                 orElseThrow(
                         () -> new TaskErrorException("Could not find task")
                 );
 
-        if (!person.getId().equals(task.getPerson().getId())) {
+        Person personTobeAllocated = personRepository.findById(personId).
+                orElseThrow(
+                        () -> new TaskErrorException("Could not find person")
+                );
+
+        if (!personTobeAllocated.getDepartment().getId().equals(task.getDepartment().getId())) {
             throw new TaskErrorException("Person isn't from the same department");
         }
 
-        task.setPerson(person);
+        task.setPerson(personTobeAllocated);
         taskRepository.save(task);
         log.info("Person allocated with success!!");
         return task;

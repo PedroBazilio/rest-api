@@ -5,7 +5,9 @@ import com.pedro.restapi.repository.PersonRepository;
 import com.pedro.restapi.rest.errors.DepartmentErrorException;
 import com.pedro.restapi.rest.errors.PersonErrorException;
 import com.pedro.restapi.service.PersonService;
+import com.pedro.restapi.service.dto.PersonAvgTimeTaskDTO;
 import com.pedro.restapi.service.dto.PersonDTO;
+import com.pedro.restapi.service.dto.PersonTotalTimeTaskDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pessoa")
+@RequestMapping("/pessoas")
 public class PersonResource {
 
     private PersonService personService;
@@ -29,24 +31,28 @@ public class PersonResource {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<PersonDTO>> getPeopleWithTotalTime() {
+    public ResponseEntity<List<PersonTotalTimeTaskDTO>> getPeopleWithTotalTime() {
         log.info("Rest request to get people");
-        List<PersonDTO> peopleList = personService.getPeopleList();
+        List<PersonTotalTimeTaskDTO> peopleList = personService.getPeopleList();
+        return ResponseEntity.ok(peopleList);
+    }
+
+    @GetMapping("/gastos")
+    public ResponseEntity<List<PersonAvgTimeTaskDTO>> getPeopleWithAvgTime() {
+        log.info("Rest request to get people");
+        List<PersonAvgTimeTaskDTO> peopleList = personService.getPeopleListAvgTime();
         return ResponseEntity.ok(peopleList);
     }
 
 
     @PostMapping
     public ResponseEntity<Person> createPerson(@RequestBody Person person) throws URISyntaxException {
-        log.info("Rest request to save Person: {}", person);
-        if (person.getId() != null) {
-            throw new PersonErrorException("A new person cannot already have an ID");
-        }
+        log.info("Rest request to save Person: {}", person.getName());
         return ResponseEntity.ok(personService.save(person));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable Long id,@RequestBody Person person) throws URISyntaxException, DepartmentErrorException {
+    public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person person) throws URISyntaxException, DepartmentErrorException {
         log.info("Rest request to update Person: {}", person);
         return ResponseEntity.ok(personService.update(id, person));
     }
@@ -62,10 +68,5 @@ public class PersonResource {
         log.info("Person deleted!");
         return ResponseEntity.ok().build();
     }
-
-
-
-
-
 
 }

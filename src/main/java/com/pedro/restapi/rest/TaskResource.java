@@ -13,8 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -36,15 +39,16 @@ public class TaskResource {
 
 
     @PostMapping("")
-    public ResponseEntity<Task> addTask(Task task) throws URISyntaxException {
+    public ResponseEntity<Task> addTask(@RequestBody Task task) throws URISyntaxException {
         log.info("Rest request to add a task");
         return ok(taskService.add(task));
     }
 
     @PutMapping("/alocar/{id}")
-    public ResponseEntity<Task> allocateTask (@PathVariable Long id, Person person) throws TaskErrorException {
+    public ResponseEntity<Task> allocateTask (@PathVariable Long id, @RequestBody Map<String, Object> personIdToAllocate) throws TaskErrorException {
         log.info("Rest request to allocate a task");
-        return ResponseEntity.ok(taskService.allocate(id, person));
+        Long personId = Long.parseLong(personIdToAllocate.get("person_id").toString());
+        return ResponseEntity.ok(taskService.allocate(id, personId));
 
     }
 
@@ -63,7 +67,12 @@ public class TaskResource {
         return ResponseEntity.ok(pendingTasks);
     }
 
-
+    @GetMapping("/gastos")
+    public ResponseEntity<List<Task>> getAvgTimeTasks() {
+        log.info("Rest request to get pending tasks");
+        List<Task> pendingTasks = taskService.getPendingTasks();
+        return ResponseEntity.ok(pendingTasks);
+    }
 
 
 }

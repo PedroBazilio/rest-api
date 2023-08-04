@@ -3,38 +3,44 @@ package com.pedro.restapi.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "task")
-public class Task {
+import static jakarta.persistence.GenerationType.IDENTITY;
 
-    private static final long serialVersionUID = 1L;
+@Entity
+public class Task{
+
+
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(nullable = false)
     private String title;
 
-    @Column(name = "description")
     private String description;
+    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dueDate;
 
-    @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
-    @Column(name = "dueDate")
-    private LocalDateTime dueDate;
+    @Column(nullable = false)
+    private BigDecimal duration;
 
-    @Column(name = "duration")
-    private Duration duration;
-
-    @Column(name = "finished")
+    @Column(nullable = false)
     private Boolean finished;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
     private Department department;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "person_id")
     private Person person;
 
     public Long getId() {
@@ -61,19 +67,19 @@ public class Task {
         this.description = description;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Duration getDuration() {
+    public BigDecimal getDuration() {
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public void setDuration(BigDecimal duration) {
         this.duration = duration;
     }
 

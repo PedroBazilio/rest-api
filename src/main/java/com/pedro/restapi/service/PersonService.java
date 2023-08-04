@@ -2,13 +2,16 @@ package com.pedro.restapi.service;
 
 import com.pedro.restapi.domain.Department;
 import com.pedro.restapi.domain.Person;
+import com.pedro.restapi.domain.Task;
 import com.pedro.restapi.repository.DepartmentRepository;
 import com.pedro.restapi.repository.PersonRepository;
 import com.pedro.restapi.rest.PersonResource;
 import com.pedro.restapi.rest.errors.DepartmentErrorException;
 import com.pedro.restapi.rest.errors.PersonErrorException;
 import com.pedro.restapi.service.dto.DepartmentDTO;
+import com.pedro.restapi.service.dto.PersonAvgTimeTaskDTO;
 import com.pedro.restapi.service.dto.PersonDTO;
+import com.pedro.restapi.service.dto.PersonTotalTimeTaskDTO;
 import com.pedro.restapi.service.mapper.PersonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +21,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +50,7 @@ public class PersonService {
     }
 
 
-    public Person update(Long id, Person Updatedperson) throws DepartmentErrorException {
+    public Person update(Long id, Person updatedPerson) throws DepartmentErrorException {
         log.info("Updating person...");
 
         Person person = personRepository.findById(id)
@@ -54,13 +58,15 @@ public class PersonService {
                         () -> new PersonErrorException("Person not found")
         );
 
-        person.setName(Updatedperson.getName());
-        Department newDepartment = departmentRepository.findById(Updatedperson.getDepartment().getId())
-                .orElseThrow(
-                        () -> new DepartmentErrorException("Department not found")
-                );
+        person.setName(updatedPerson.getName());
+        if(updatedPerson.getDepartment() != null) {
+            Department newDepartment = departmentRepository.findById(updatedPerson.getDepartment().getId())
+                    .orElseThrow(
+                            () -> new DepartmentErrorException("Department not found")
+                    );
 
-        person.setDepartment(newDepartment);
+            person.setDepartment(newDepartment);
+        }
 
         log.info("Person updated!");
         return personRepository.save(person);
@@ -75,28 +81,46 @@ public class PersonService {
     }
 
 
-    public List<PersonDTO> getPeopleList() {
+    public List<PersonTotalTimeTaskDTO> getPeopleList() {
         List<Person> people = personRepository.findAll();
 
         return people.stream()
                 .map(person -> {
                     float totalDuration = (float) person.getTasks()
                             .stream()
-                            .mapToDouble(task -> task.getDuration().toHours())
+                            .mapToDouble(personTask -> personTask.getDuration().doubleValue())
                             .sum();
 
-                    PersonDTO personDTO = new PersonDTO();
-                    personDTO.setName(person.getName());
-                    personDTO.setDepartmentName(person.getDepartment().getTitle());
-                    personDTO.setTotalTaskTime(totalDuration);
+                    PersonTotalTimeTaskDTO personTotalTimeTaskDTO = new PersonTotalTimeTaskDTO();
+                    personTotalTimeTaskDTO.setName(person.getName());
+                    personTotalTimeTaskDTO.setDepartmentName(person.getDepartment().getTitle());
+                    personTotalTimeTaskDTO.setTotalTaskTime(totalDuration);
 
-                    return personDTO;
+                    return personTotalTimeTaskDTO;
                 })
                 .collect(Collectors.toList());
     }
 
-//    public List<DepartmentDTO> getDepartmentsWithCounts() {
-//        return Departmen.findDepartments();
-//    }
+    public List<PersonAvgTimeTaskDTO> getPeopleListAvgTime() {
+        List<Person> people = personRepository.findAll();
+
+        return people.stream()
+                .map(person -> {
+                    OptionalDouble avgDuration = person.getTasks()
+                            .stream()
+                            .mapToInt(personTask -> personTask.getDuration().intValue())
+                            .average();
+
+                    PersonAvgTimeTaskDTO personAvgTimeTaskDTO = new PersonAvgTimeTaskDTO();
+                    personAvgTimeTaskDTO.setName(person.getName());
+                    personAvgTimeTaskDTO.setDepartmentName(person.getDepartment().getTitle());
+                    personAvgTimeTaskDTO.setAvgTaskTime(avgDuration);
+
+                    return personAvgTimeTaskDTO;
+                })
+                .collect(Collectors.toList());
+
+
+    }
 
 }

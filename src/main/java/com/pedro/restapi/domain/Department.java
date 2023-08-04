@@ -2,16 +2,21 @@ package com.pedro.restapi.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 
 @Entity
-@Table(name = "department")
-public class Department {
-    private static final long serialVersionUID = 1L;
+public class Department{
+
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column(nullable = false)
     private String title;
 
     public Long getId() {

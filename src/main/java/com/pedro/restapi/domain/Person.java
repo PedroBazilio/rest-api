@@ -3,23 +3,27 @@ package com.pedro.restapi.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.Set;
 
-@Entity
-@Table(name = "person")
-public class Person {
+import static jakarta.persistence.GenerationType.IDENTITY;
 
-    private static final long serialVersionUID = 1L;
+@Entity
+public class Person{
+
 
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    Department department;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     @OneToMany(mappedBy = "person")
     @JsonIgnore

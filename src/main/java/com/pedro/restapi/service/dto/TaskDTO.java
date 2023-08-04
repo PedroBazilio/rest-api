@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 public class TaskDTO implements Serializable {
 
-    private static final long serialVersionUID = -6775833611650081935L;
 
     private String title;
 
