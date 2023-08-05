@@ -32,6 +32,10 @@ public class PersonService {
         this.departmentRepository = departmentRepository;
     }
 
+    public PersonService() {
+
+    }
+
     public Person save(Person person) {
         log.info("Saving new person");
         personRepository.save(person);
@@ -59,7 +63,8 @@ public class PersonService {
         }
 
         log.info("Person updated!");
-        return personRepository.save(person);
+        Person personUpdated = personRepository.save(person);
+        return personUpdated;
 
     }
 
@@ -109,7 +114,6 @@ public class PersonService {
                     return personAvgTimeTaskDTO;
                 })
                 .collect(Collectors.toList());
-
 
     }
 
