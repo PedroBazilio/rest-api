@@ -5,31 +5,22 @@ import com.pedro.restapi.domain.Person;
 import com.pedro.restapi.domain.Task;
 import com.pedro.restapi.repository.DepartmentRepository;
 import com.pedro.restapi.repository.PersonRepository;
-import com.pedro.restapi.rest.TaskResource;
 import com.pedro.restapi.rest.errors.DepartmentErrorException;
 import com.pedro.restapi.rest.errors.PersonErrorException;
 import com.pedro.restapi.service.PersonService;
 import com.pedro.restapi.service.dto.PersonAvgTimeTaskDTO;
 import com.pedro.restapi.service.dto.PersonTotalTimeTaskDTO;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.EmptyResultDataAccessException;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

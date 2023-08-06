@@ -31,7 +31,7 @@ public class TaskService {
 
 
     public Task add(Task task) {
-        log.info("Adding task {}", task);
+        log.info("Adding task {}", task.getTitle());
         return taskRepository.save(task);
     }
 
