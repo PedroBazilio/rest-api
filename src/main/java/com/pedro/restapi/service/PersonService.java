@@ -32,9 +32,6 @@ public class PersonService {
         this.departmentRepository = departmentRepository;
     }
 
-    public PersonService() {
-
-    }
 
     public Person save(Person person) {
         log.info("Saving new person");
