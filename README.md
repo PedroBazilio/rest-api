@@ -16,12 +16,14 @@
 - Java Spring Boot
 - Hibernate
 - JPA
+- Junit
 - PostgreSQL
 - Docker
 
 ## Endpoints
 
 - **GET /pessoas**:  Lista funcioários trazendo nome, departamento e total de horas gastas em tarefas.
+- **GET /pessoas/gastos**: Busca pessoas por nome e período, retorna média de horas gastas por tarefa.
 - **POST /pessoas**: Cria um novo funcionário
 - **PUT /pessoas/{id}**: Atualiza um usuário existente.
 - **DELETE /pessoas/{id}**: Deleta um funcionário.
@@ -29,7 +31,8 @@
 - **PUT /tarefas/alocar/{id}**: Aloca um funcinário para uma tarefa.
 - **PUT /tarefas/finalizar/{id}**: Finaliza uma tarefa
 - **GET /tarefas/pendentes**: Lista 3 tarefas sem um funcionário alocado ordenando da mais antiga para a mais nova
-
+- **GET /departamentos**: Lista departamentos além da quantidade de pessoas e tarefas.
+- #### [instruções para os endpoints:](https://docs.google.com/document/d/1pyEMTMOeT6_kTTztHfxDXmBuEjHKmPfHxZVL9AtwQC0/edit?usp=sharing)
 
 ## Como Rodar
 
