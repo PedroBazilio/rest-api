@@ -55,7 +55,7 @@ mvn clean package -DskipTests
 ```shell
 docker compose up
 ```
-### Após isto, caso não haja erros você terá o projeto rodando e o banco de dados funcional. 
+### Após isto, caso não haja erros, você terá o projeto rodando e o banco de dados funcional. 
 O banco é pré populado e caso deseje acessá-lo é só utilizar o seu gerenciador de bancos preferido e usar as seguintes credenciais:
 
 - Host: localhost
